@@ -5,7 +5,8 @@
   "description": "Detect phishing websites using AI",
   "permissions": [
     "activeTab",
-    "tabs"
+    "tabs",
+    "scripting"
   ],
   "host_permissions": [
     "<all_urls>"

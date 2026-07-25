@@ -1,69 +1,91 @@
-function calculateRisk(url) {
+function calculateRisk(url, pageText) {
+
     let score = 0;
     let reasons = [];
 
-    // Suspicious keywords
-    const keywords = [
+    // URL keywords
+    const urlKeywords = [
         "login",
         "verify",
         "secure",
-        "update",
         "bank",
         "account",
         "signin",
         "password"
     ];
 
-    keywords.forEach(word => {
+    urlKeywords.forEach(word => {
         if (url.toLowerCase().includes(word)) {
             score += 15;
-            reasons.push(`Contains keyword: ${word}`);
+            reasons.push(`URL contains "${word}"`);
         }
     });
 
-    // IP Address detection
+    // Page content keywords
+    const pageKeywords = [
+        "verify your account",
+        "confirm identity",
+        "update payment",
+        "security alert",
+        "login",
+        "password",
+        "bank"
+    ];
+
+    pageKeywords.forEach(word => {
+        if (pageText.toLowerCase().includes(word)) {
+            score += 10;
+            reasons.push(`Page contains "${word}"`);
+        }
+    });
+
+    // IP address
     const ipRegex = /\b\d{1,3}(\.\d{1,3}){3}\b/;
 
     if (ipRegex.test(url)) {
         score += 40;
-        reasons.push("Uses an IP address");
+        reasons.push("IP address detected");
     }
 
-    // Too many subdomains
-    const hostname = new URL(url).hostname;
-    const parts = hostname.split(".");
-
-    if (parts.length > 3) {
-        score += 20;
-        reasons.push("Too many subdomains");
-    }
-
-    return {
-        score,
-        reasons
-    };
+    return { score, reasons };
 }
 
-chrome.tabs.query({ active: true, currentWindow: true }, function (tabs) {
+chrome.tabs.query({ active: true, currentWindow: true }, async function(tabs){
 
-    const currentURL = tabs[0].url;
+    const tab = tabs[0];
 
-    document.getElementById("url").textContent = currentURL;
+    document.getElementById("url").textContent = tab.url;
 
-    const result = calculateRisk(currentURL);
+    chrome.scripting.executeScript(
+    {
+        target:{tabId:tab.id},
+        func:()=>document.body.innerText
+    },
+    (result)=>{
 
-    let status = "✅ Safe";
+        const pageText=result[0].result;
 
-    if (result.score >= 50)
-        status = "🚨 High Risk";
-    else if (result.score >= 20)
-        status = "⚠ Suspicious";
+        const analysis=calculateRisk(tab.url,pageText);
 
-    document.getElementById("risk").innerHTML =
-        `
-        <strong>Risk Score:</strong> ${result.score}<br>
-        <strong>Status:</strong> ${status}<br><br>
-        <strong>Reasons:</strong><br>
-        ${result.reasons.join("<br>")}
+        let status="✅ Safe";
+
+        if(analysis.score>=60)
+            status="🚨 High Risk";
+        else if(analysis.score>=25)
+            status="⚠ Suspicious";
+
+        document.getElementById("risk").innerHTML=`
+
+        <b>Risk Score:</b> ${analysis.score}<br>
+
+        <b>Status:</b> ${status}<br><br>
+
+        <b>Reasons</b><br>
+
+        ${analysis.reasons.join("<br>")}
+
         `;
+
+    });
+
 });
