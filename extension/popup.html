@@ -1,13 +1,40 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>AI Phishing Detector</title>
+<meta charset="UTF-8">
+<title>AI Phishing Detector</title>
+<style>
+body{
+font-family:Arial;
+width:320px;
+padding:15px;
+}
+
+h2{
+margin-top:0;
+}
+
+#url{
+word-wrap:break-word;
+color:blue;
+}
+
+#risk{
+margin-top:15px;
+font-weight:bold;
+}
+</style>
 </head>
+
 <body>
 
 <h2>AI Phishing Detector</h2>
 
-<p id="risk">Scanning...</p>
+<p><strong>Current URL:</strong></p>
+
+<p id="url">Loading...</p>
+
+<p id="risk">Risk Score: 0</p>
 
 <script src="popup.js"></script>
 
