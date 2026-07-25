@@ -1,14 +1,4 @@
-![Python](https://img.shields.io/badge/Python-3.13-blue)
-
-![Flask](https://img.shields.io/badge/Flask-3.1-green)
-
-![Chrome Extension](https://img.shields.io/badge/Chrome-Manifest%20V3-yellow)
-
-![Ollama](https://img.shields.io/badge/Ollama-Llama3-red)
-
-![VirusTotal](https://img.shields.io/badge/VirusTotal-API-orange)
-
-![License](https://img.shields.io/badge/License-MIT-blue)
+![Python](https://img.shields.io/badge/Python-3.13-blue) ![Flask](https://img.shields.io/badge/Flask-3.1-green) ![Chrome Extension](https://img.shields.io/badge/Chrome-Manifest%20V3-yellow) ![Ollama](https://img.shields.io/badge/Ollama-Llama3-red) ![VirusTotal](https://img.shields.io/badge/VirusTotal-API-orange) ![License](https://img.shields.io/badge/License-MIT-blue)
 
 
 # AI Phishing Detector Browser Extension
