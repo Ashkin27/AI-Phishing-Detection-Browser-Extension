@@ -1,6 +1,7 @@
 from flask import Flask, request, jsonify
 from flask_cors import CORS
 import ollama
+from virustotal import check_url
 
 app = Flask(__name__)
 CORS(app)
@@ -10,6 +11,7 @@ def analyze():
 
     data = request.json
     url = data.get("url", "")
+    vt = check_url(url)
     page_text = data.get("text", "")
 
     prompt = f"""
@@ -47,7 +49,8 @@ Recommendations:
     )
 
     return jsonify({
-        "analysis":response["message"]["content"]
+        "analysis":response["message"]["content"],
+        "virustotal": vt
     })
 
 if __name__=="__main__":
