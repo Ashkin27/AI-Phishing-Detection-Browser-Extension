@@ -3,6 +3,7 @@ from flask_cors import CORS
 import ollama
 from virustotal import check_url
 from ssl_checker import check_ssl
+from whois_checker import check_domain
 
 app = Flask(__name__)
 CORS(app)
@@ -15,6 +16,7 @@ def analyze():
     vt = check_url(url)
     ssl_info = check_ssl(url)
     page_text = data.get("text", "")
+    domain_info = check_domain(url)
 
     prompt = f"""
 You are an expert cybersecurity analyst.
@@ -53,7 +55,8 @@ Recommendations:
     return jsonify({
         "analysis":response["message"]["content"],
         "virustotal": vt,
-        "ssl": ssl_info
+        "ssl": ssl_info,
+        "domain": domain_info
     })
 
 if __name__=="__main__":
