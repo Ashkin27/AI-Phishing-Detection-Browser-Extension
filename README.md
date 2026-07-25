@@ -23,21 +23,21 @@ The extension provides users with an intuitive interface displaying website risk
 1. User opens a webpage.
 2. User clicks **Scan Website**.
 3. Extension extracts:
-- URL
-- Visible webpage content
+  - URL
+  - Visible webpage content
 4. Data is sent to the Flask backend.
 5. Backend performs:
-- AI Analysis using Llama 3
-- SSL Certificate Validation
-- VirusTotal Reputation Lookup
-- WHOIS Domain Analysis
+  - AI Analysis using Llama 3
+  - SSL Certificate Validation
+  - VirusTotal Reputation Lookup
+  - WHOIS Domain Analysis
 6. Results are merged into one security report.
 7. Browser extension displays:
-- Risk Level
-- AI Summary
-- SSL Information
-- VirusTotal Detection
-- Domain Information
+  - Risk Level
+  - AI Summary
+  - SSL Information
+  - VirusTotal Detection
+  - Domain Information
 
 ## Features
 
