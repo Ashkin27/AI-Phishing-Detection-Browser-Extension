@@ -13,7 +13,7 @@ function calculateRisk(url, pageText) {
         "signin",
         "password"
     ];
-
+    
     urlKeywords.forEach(word => {
         if (url.toLowerCase().includes(word)) {
             score += 15;
