@@ -3,38 +3,48 @@
 <head>
 <meta charset="UTF-8">
 <title>AI Phishing Detector</title>
-<style>
-body{
-font-family:Arial;
-width:320px;
-padding:15px;
-}
-  
-h2{
-margin-top:0;
-}
-
-#url{
-word-wrap:break-word;
-color:blue;
-}
-
-#risk{
-margin-top:15px;
-font-weight:bold;
-}
-</style>
+<link rel="stylesheet" href="style.css">
 </head>
 
 <body>
 
-<h2>AI Phishing Detector</h2>
+<div class="container">
 
-<p><strong>Current URL:</strong></p>
+    <h2>🛡 AI Phishing Detector</h2>
 
-<p id="url">Loading...</p>
+<div class="card">
+    <div class="title">🌐 Website</div>
+    <div id="url">Loading...</div>
+</div>
 
-<div id="risk">Risk Score: 0</div>
+<div class="status-card">
+    <div id="riskLevel">Ready to Scan</div>
+    <div id="confidence">Click Scan Website</div>
+</div>
+
+<div class="card">
+    <h3>🔒 SSL Security</h3>
+    <div id="ssl"></div>
+</div>
+
+<div class="card">
+    <h3>🦠 VirusTotal</h3>
+    <div id="vt"></div>
+</div>
+
+<div class="card">
+    <h3>🌍 Domain Information</h3>
+    <div id="domainInfo"></div>
+</div>
+
+<div class="card">
+    <h3>🤖 AI Analysis</h3>
+    <div id="summary"></div>
+</div>
+
+<button id="scanButton">Scan Website</button>
+
+</div>
 
 <script src="popup.js"></script>
 
