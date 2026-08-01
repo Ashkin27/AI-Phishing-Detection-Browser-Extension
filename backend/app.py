@@ -41,7 +41,7 @@ Reason:
 Confidence:
 Recommendations:
 """
-
+    
     response = ollama.chat(
         model="llama3",
         messages=[
